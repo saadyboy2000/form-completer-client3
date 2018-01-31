@@ -3,7 +3,6 @@ import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 import { Control } from 'react-redux-form';
 import Input from './input';
 import {required, nonEmpty, email} from '../validators';
-import Select from './select';
 import NavigationBar from './NavigationBar';
 //control from react-redux-form documentation:
 //https://davidkpiano.github.io/react-redux-form/docs/api/Control.html
@@ -138,6 +137,17 @@ export class ContactForm extends React.Component {
                     component={Input}
                     label="Please describe any present Illness"
                 />
+
+                <label>Do you use tobacco?</label>
+
+                 <Field
+                    name="tobacco1"
+                    element="select"
+                    component="select"
+                    label="Do you use tobacco?"> 
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </Field>
                    <div>
         <label htmlFor="user.tobacco">Do you use tobacco?:</label>
         <select name="tobacco" id="tobacco" onChange= {this.handleChange.bind(this)}>
