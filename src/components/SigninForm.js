@@ -2,7 +2,8 @@ import React from 'react';
 import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty, email} from '../validators';
-import NavigationBar from './NavigationBar';
+import {LOGIN_SENT} from '../actions/loginAction';
+//import NavigationBar from './NavigationBar';
 //control from react-redux-form documentation:
 //https://davidkpiano.github.io/react-redux-form/docs/api/Control.html
 //react-redux form documentation
@@ -10,9 +11,9 @@ import NavigationBar from './NavigationBar';
 //ask about field, where you can find that documentation, also how to just have a label
 //when do I use select?
 
-export class SignupForm extends React.Component {
+export class SigninForm extends React.Component {
     onSubmit(values) {
-        return fetch('/api/users', {
+        return fetch('api/auth/login', {
             method: 'POST',
             body: JSON.stringify(values),
             headers: {
@@ -38,8 +39,10 @@ export class SignupForm extends React.Component {
                 }
                 return;
             })
-            .then(() => console.log('Submitted with values', values))
-            .catch(err => {
+            .then(() => {
+                this.props.dispatch(LOGIN_SENT, values)
+            })//console.log('Submitted with values', values))
+            .catch(err => { 
                 const {reason, message, location} = err;
                 if (reason === 'ValidationError') {
                     // Convert ValidationErrors into SubmissionErrors for Redux Form
@@ -77,7 +80,7 @@ export class SignupForm extends React.Component {
         }
 
         return (
-            <div className= "row">
+<div className= "row">
      <div className = "col-md-4 col-md-offset-4">
                 
             
@@ -87,18 +90,12 @@ export class SignupForm extends React.Component {
                 )}>
                 {successMessage}
                 {errorMessage}
-                <Field
-                    name="name"
-                    type="text"
-                    component={Input}
-                    label="What is your name?"
-                    validate={[required, nonEmpty]}
-                />
+               
                 <Field
                     name="email"
                     type="email"
                     component={Input}
-                    label="please enter your email address"
+                    label="Email Address"
                     validate={[required, nonEmpty, email]}
                 />
                    <Field
@@ -108,16 +105,7 @@ export class SignupForm extends React.Component {
                     label="Password"
                     validate={[required, nonEmpty]}
                 />
-              
-                   <Field
-                    name="passwordConfirmation"
-                    type="password"
-                    component={Input}
-                    label="Confirm Password"
-                    validate={[required, nonEmpty]}
-                />
                   
-
 
                 <button
                     type="submit"
@@ -125,14 +113,14 @@ export class SignupForm extends React.Component {
                     Send message
                 </button>
             </form>
-           </div>
-            </div>
+    </div>
+</div>
         );
     }
 }
 
 export default reduxForm({
-    form: 'signup',
+    form: 'signin',
     onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('signup', Object.keys(errors)[0]))
-})(SignupForm);
+        dispatch(focus('signin', Object.keys(errors)[0]))
+})(SigninForm);

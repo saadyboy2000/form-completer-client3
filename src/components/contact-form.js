@@ -58,16 +58,7 @@ export class ContactForm extends React.Component {
             });
     }
 
-     handleChange(event){
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
 
-        this.setState({
-            [name]: value
-        })
-
-     }
 
     render() {
         let successMessage;
@@ -88,8 +79,7 @@ export class ContactForm extends React.Component {
 
         return (
             <div className = "container">
-                <NavigationBar />
-                {this.props.children}
+               
             
             <form
                 onSubmit={this.props.handleSubmit(values =>
@@ -111,19 +101,47 @@ export class ContactForm extends React.Component {
                     label="please enter your email address"
                     validate={[required, nonEmpty, email]}
                 />
+
+                <Field
+                    name="age"
+                    type="text"
+                    component={Input}
+                    label="What is your age?"
+                    validate={[required, nonEmpty]}
+                />
+
+                <label>What is your marrital status?</label>
+
+                 <Field
+                    name="marital"
+                    element="select"
+                    component="select"
+                    label="What is your marital status?"> 
+                    <option value="married">married</option>
+                    <option value="separated">separated</option>
+                    <option value="divorced">divorced</option>
+                    <option value="widowed">widowed</option>
+                    <option value="separated">separated</option>
+                </Field>
+
+                    <label>Which hand is your dominant hand?</label>
+
+                 <Field
+                    name="hand"
+                    element="select"
+                    component="select"
+                    label="Which hand is your dominant hand?"> 
+                    <option value="right">right</option>
+                    <option value="left">left</option>
+                </Field>
+
                    <Field
                     name="interpreter"
                     type="text"
                     component={Input}
                     label="If you're using an interpreter, please enter their name and agency"
                 />
-                <div>
-        <label htmlFor="user.gender">What is your gender?:</label>
-        <select name="gender" id="gender" onChange= {this.handleChange.bind(this)}>
-          <option value="male">male</option>
-          <option value="female">female</option>
-        </select>
-                </div>
+              
                    <Field
                     name="Main medical issue"
                     element="textarea"
@@ -141,44 +159,56 @@ export class ContactForm extends React.Component {
                 <label>Do you use tobacco?</label>
 
                  <Field
-                    name="tobacco1"
+                    name="tobacco"
                     element="select"
                     component="select"
                     label="Do you use tobacco?"> 
                     <option value="yes">yes</option>
                     <option value="no">no</option>
                 </Field>
-                   <div>
-        <label htmlFor="user.tobacco">Do you use tobacco?:</label>
-        <select name="tobacco" id="tobacco" onChange= {this.handleChange.bind(this)}>
-          <option value="yes">yes</option>
-          <option value="no">no</option>
-        </select>
-                </div>
+              
+                <label>Do you use nonmedical drugs?</label>
 
-                 <div>
-        <label htmlFor="user.drugs">Do you use non-prescription drugs?:</label>
-        <select name="drugs" id="drugs"onChange= {this.handleChange.bind(this)}>
-          <option value="yes">yes</option>
-          <option value="no">no</option>
-        </select>
-                </div>
+                 <Field
+                    name="nonmedicalDrugs"
+                    element="select"
+                    component="select"
+                    label="Do you use nonmedical drugs?"> 
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </Field>
+             
 
-                 <div>
-        <label htmlFor="user.alcohol">Do you consume alcohol?:</label>
-        <select name="alcohol" id="alcohol" onChange= {this.handleChange.bind(this)}>
-          <option value="yes">yes</option>
-          <option value="no">no</option>
-        </select>
-                </div>
+                <label>Do you use alcohol?</label>
 
-                  <div>
-        <label htmlFor="user.vd">Do you have any form of vinerial disease?:</label>
-        <select name="vd" id="user.vd" onChange= {this.handleChange.bind(this)}>
-          <option value="yes">yes</option>
-          <option value="no">no</option>
-        </select>
-                </div>
+                 <Field
+                    name="alcohol"
+                    element="select"
+                    component="select"
+                    label="Do you use alcohol?"> 
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </Field>
+
+                <label>Do you have VD(venereal disease)?</label>
+
+                 <Field
+                    name="VD"
+                    element="select"
+                    component="select"
+                    label="Do you have VD "> 
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </Field>
+
+                <Field
+                    name="workedLast"
+                    type="text"
+                    component={Input}
+                    label="When did you work last?(Enter approximate month and/or year)"
+                />
+
+           
 
                 <Field
                     name="Past History"
@@ -222,23 +252,34 @@ export class ContactForm extends React.Component {
                 />
 
                 <Field
-                    name="Disability Begin"
+                    name="DisabilityBegin"
                     type="text"
                     component={Input}
                     label="When did your disability begin?(date)"
                 />
 
-                 <div>
-        <label htmlFor="user.origin">What is the origin of your major disability?:</label>
-        <select name="origin" id="origin"onChange= {this.handleChange.bind(this)}>
-          <option value="injury">Injury</option>
-          <option value="Congenital">Congenital</option>
-          <option value="Hereditary">Hereditary</option>
-          <option value="Birth trauma">Birth trauma</option>
-          <option value="Other">Other</option>
-          <option value="Unknown">Unknown</option>
-        </select>
-                </div>
+                <label>What is the origin of your major disability?</label>
+
+                 <Field
+                    name="origin"
+                    element="select"
+                    component="select"
+                    label="What is the origin of your major disability?"> 
+                    <option value="unknown">unknown</option>
+                    <option value="disease">disease</option>
+                    <option value="injury">injury</option>
+                    <option value="congenital">congenital</option>
+                    <option value="hereditary">hereditary</option>
+                    <option value="birth trauma">birth trauma</option>
+                    <option value="other">other</option>
+                </Field>
+
+                 <Field
+                    name="otherSpecify"
+                    type="text"
+                    component={Input}
+                    label="If other was selected in the last question please specify the origin of your major disability"
+                />
 
                 <Field
                     name="Medications"
